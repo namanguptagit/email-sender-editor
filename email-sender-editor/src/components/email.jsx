@@ -1,6 +1,7 @@
 import React from 'react'
 import emailjs from "emailjs-com"
 import {useState} from 'react'
+import axios from 'axios'
 function Email (){
     const [input, setInput] = useState({
         name: '',
@@ -30,6 +31,15 @@ function Email (){
 
     function sentEmail(e){
         e.preventDefault();
+
+        const newData = {
+            name:input.name,
+            rname:input.rname,
+            user_email:input.user_email,
+            message:input.message
+        }
+        axios.post('http://localhost:3002/create', newData)
+
         console.log(input);
         emailjs.sendForm('service_qhxvpbc','template_395ab6m',e.target,'user_hMSXOwQqsDiffa4ULEg41').then(res=>{
             console.log(res);
