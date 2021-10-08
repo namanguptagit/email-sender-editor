@@ -63,7 +63,7 @@ function Email (){
                 <textarea onChange={handleChange} name="message" rows="4" value={input.message} className="form-control"></textarea>
                 <input  type="submit" value='send' className="form-control btn btn-primary" style={{marginTop:"30px"}} />
             </form>
-            <input type="submit" value='Edit existing template' className="form-control btn btn-primary" style={{marginBottom:"40px"}} />
+            {/* <input type="submit" value='Edit existing template' className="form-control btn btn-primary" style={{marginBottom:"40px"}} /> */}
         </div>
     )
 }
