@@ -1,9 +1,36 @@
 import React from 'react'
 import emailjs from "emailjs-com"
-
+import {useState} from 'react'
 function Email (){
+    const [input, setInput] = useState({
+        name: '',
+        rname: '',
+        user_email: '',
+        message: '' 
+    })
+
+    function handleChange(event){
+    const {name, value} = event.target;
+    setInput(prevInput => {
+        return{
+            ...prevInput,
+            [name]: value
+        }
+    });
+    }
+
+    // function handleClick(event){
+    //     event.preventDefault();
+    //     console.log(input);
+    //     event.preventDefault();
+    //     emailjs.sendForm('service_qhxvpbc','template_395ab6m',event.target,'user_hMSXOwQqsDiffa4ULEg41').then(res=>{
+    //         console.log(res);
+    //     }).catch(err=> console.log(err));
+    // }
+
     function sentEmail(e){
         e.preventDefault();
+        console.log(input);
         emailjs.sendForm('service_qhxvpbc','template_395ab6m',e.target,'user_hMSXOwQqsDiffa4ULEg41').then(res=>{
             console.log(res);
         }).catch(err=> console.log(err));
@@ -17,14 +44,14 @@ function Email (){
             <h1 style={{marginTop:'25px'}}>Email Sender and Editor</h1>
             <form className="row" style={{margin:"25px 85px 75px 100px"}} onSubmit={sentEmail}>
                 <label >Name</label>
-                <input type="text" name="name" className="form-control"/>
+                <input onChange={handleChange} type="text" name="name" value={input.name} className="form-control"/>
                 <label >Reciever Name</label>
-                <input type="text" name="rname" className="form-control"/>
+                <input onChange={handleChange} type="text" name="rname" value={input.rname} className="form-control"/>
                 <label >Reciever Email</label>
-                <input type="email" name="user_email" className="form-control"/>
+                <input onChange={handleChange} type="email" name="user_email" value={input.user_email} className="form-control"/>
                 <label >Message</label>
-                <textarea name="message" rows="4" className="form-control"></textarea>
-                <input type="submit" value='send' className="form-control btn btn-primary" style={{marginTop:"30px"}} />
+                <textarea onChange={handleChange} name="message" rows="4" value={input.message} className="form-control"></textarea>
+                <input  type="submit" value='send' className="form-control btn btn-primary" style={{marginTop:"30px"}} />
             </form>
             <input type="submit" value='Edit existing template' className="form-control btn btn-primary" style={{marginBottom:"40px"}} />
         </div>
